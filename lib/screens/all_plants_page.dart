@@ -99,7 +99,7 @@ class AllPlantsPage extends StatelessWidget {
                                     child: const Center(
                                       child: Icon(Icons.favorite_border),
                                     )
-                                ),
+                                  ),
                                 )
                               ],
                             ),
