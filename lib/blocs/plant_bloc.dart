@@ -26,10 +26,9 @@ class PlantBloc extends Bloc<PlantEvent, PlantState> {
     on<FetchPlants>((event, emit) async {
       try {
         final plants = await plantService.fetchPlants();
-        print("plants:$plants");
         emit(PlantLoaded(plants));
       } catch (e) {
-        emit(PlantError('Failed to fetch plants'));
+        emit(PlantError('Failed To Fetch Plants'));
       }
     });
   }
