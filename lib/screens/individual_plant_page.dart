@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:the_plant_app/screens/widgets/consts.dart';
 import '../models/plant.dart';
 
-class PlantDetailPage extends StatelessWidget {
+class PlantDetailsPage extends StatefulWidget {
+  const PlantDetailsPage({super.key});
+
+  @override
+  State<PlantDetailsPage> createState() => _PlantDetailsPageState();
+}
+
+class _PlantDetailsPageState extends State<PlantDetailsPage> {
+  int selectedPlantSize = -1;
+
   @override
   Widget build(BuildContext context) {
     final Plant plant = ModalRoute.of(context)!.settings.arguments as Plant;
@@ -45,13 +54,21 @@ class PlantDetailPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: Container(
-                        decoration: kSelectedPlantSizeButton,
-                        child:MaterialButton(
-                          onPressed: null,
-                          child: Text('${plant.availableSize[index].toString()} ${plant.unit}', style: kSelectedPlantSizeText,),
-                        ),
-                      ),
+                      child: Card(
+                          elevation: 2,
+                          child: Container(
+                            decoration: selectedPlantSize == index ? kSelectedPlantSizeButton : kUnselectedPlantSizeButton,
+                            child:MaterialButton(
+                              onPressed: () {
+                                print(plant.availableSize[index]);
+                                setState(() {
+                                  selectedPlantSize = index;
+                                });
+                              },
+                              child: Text('${plant.availableSize[index].toString()} ${plant.unit}', style: selectedPlantSize == index ? kSelectedPlantSizeText : kUnselectedPlantSizeText,),
+                            ),
+                          ),
+                        )
                     );
                   }
                 )
@@ -66,15 +83,15 @@ class PlantDetailPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Center(
-                    child: Icon(Icons.favorite_border, size: 50,),
-                  )
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Center(
+                      child: Icon(Icons.favorite_border, size: 50,),
+                    )
                 ),
                 Container(
                   decoration: kSelectedPlantSizeButton,
@@ -92,3 +109,7 @@ class PlantDetailPage extends StatelessWidget {
     );
   }
 }
+
+// class PlantDetailPage extends StatelessWidget {
+//
+// }

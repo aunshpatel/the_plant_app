@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         child: BottomNav(),
       ),
       routes: {
-        '/plant': (context) => PlantDetailPage(),
+        '/plant': (context) => const PlantDetailsPage(),
       },
     );
   }
