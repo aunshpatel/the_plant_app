@@ -15,10 +15,10 @@ class AllPlantsPage extends StatelessWidget {
           if (state is PlantLoading) {
             return Center(
                 child: Shimmer.fromColors(
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: Colors.grey.shade100,
-                    enabled: true,
-                    child: const SingleChildScrollView(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  enabled: true,
+                  child: const SingleChildScrollView(
                       physics: NeverScrollableScrollPhysics(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
