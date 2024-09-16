@@ -5,46 +5,98 @@ import 'package:the_plant_app/screens/widgets/placeholders.dart';
 import '../blocs/plant_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
-class AllPlantsPage extends StatelessWidget {
+class AllPlantsPage extends StatefulWidget {
+  const AllPlantsPage({super.key});
+
+  @override
+  State<AllPlantsPage> createState() => _AllPlantsPageState();
+}
+
+class _AllPlantsPageState extends State<AllPlantsPage> {
+  bool isSearchBoxOpen = false;
+  TextEditingController searchBarController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('All Plants')),
+      appBar: AppBar(
+        title: Text('All Plants'),
+        actions: [
+          !isSearchBoxOpen ? IconButton(
+            onPressed: () {
+              setState(() {
+                isSearchBoxOpen = true;
+              });
+            },
+            icon: Icon(Icons.search),
+          ) : Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: SizedBox(
+              width: 170,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 130,
+                    child: TextField(
+                      controller: searchBarController,
+                      keyboardType: TextInputType.name,
+                      onChanged:(value){ },
+                      decoration: InputDecoration(hintText: 'Search'),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 30,
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isSearchBoxOpen = false;
+                        });
+                      },
+                      icon: Icon(Icons.close),
+                    ),
+                  )
+                ],
+              )
+            ),
+          )
+        ],
+      ),
       body: BlocBuilder<PlantBloc, PlantState>(
         builder: (context, state) {
           if (state is PlantLoading) {
             return Center(
-                child: Shimmer.fromColors(
+              child: Shimmer.fromColors(
                   baseColor: Colors.grey.shade300,
                   highlightColor: Colors.grey.shade100,
                   enabled: true,
                   child: const SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          BannerPlaceholder(),
-                          TitlePlaceholder(width: double.infinity),
-                          SizedBox(height: 16.0),
-                          ContentPlaceholder(
-                            lineType: ContentLineType.threeLines,
-                          ),
-                          SizedBox(height: 16.0),
-                          TitlePlaceholder(width: 200.0),
-                          SizedBox(height: 16.0),
-                          ContentPlaceholder(
-                            lineType: ContentLineType.twoLines,
-                          ),
-                          SizedBox(height: 16.0),
-                          TitlePlaceholder(width: 200.0),
-                          SizedBox(height: 16.0),
-                          ContentPlaceholder(
-                            lineType: ContentLineType.twoLines,
-                          ),
-                        ],
-                      ),
-                    )),
+                    physics: NeverScrollableScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        BannerPlaceholder(),
+                        TitlePlaceholder(width: double.infinity),
+                        SizedBox(height: 16.0),
+                        ContentPlaceholder(
+                          lineType: ContentLineType.threeLines,
+                        ),
+                        SizedBox(height: 16.0),
+                        TitlePlaceholder(width: 200.0),
+                        SizedBox(height: 16.0),
+                        ContentPlaceholder(
+                          lineType: ContentLineType.twoLines,
+                        ),
+                        SizedBox(height: 16.0),
+                        TitlePlaceholder(width: 200.0),
+                        SizedBox(height: 16.0),
+                        ContentPlaceholder(
+                          lineType: ContentLineType.twoLines,
+                        ),
+                      ],
+                    ),
+                  )),
             );
           } else if (state is PlantLoaded) {
             final plants = state.plants;
@@ -89,16 +141,16 @@ class AllPlantsPage extends StatelessWidget {
                                   bottom: 4,
                                   right: 4,
                                   child: Container(
-                                    alignment: Alignment.bottomRight,
-                                    height: 35,
-                                    width: 35,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                    child: const Center(
-                                      child: Icon(Icons.favorite_border),
-                                    )
+                                      alignment: Alignment.bottomRight,
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      child: const Center(
+                                        child: Icon(Icons.favorite_border),
+                                      )
                                   ),
                                 )
                               ],
