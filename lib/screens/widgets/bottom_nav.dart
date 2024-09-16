@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../all_plants_page.dart';
+import '../favourite_plants.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -15,7 +16,7 @@ class _BottomNavState extends State<BottomNav> {
   static List<Widget> _pages = <Widget>[
     AllPlantsPage(),
     const Text('Checkout Cart'),  // Replace with actual screens
-    const Text('Favorite Plants'),
+    FavouritePlants(),
     const Text('Profile'),
   ];
 
