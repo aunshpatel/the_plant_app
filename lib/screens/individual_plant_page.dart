@@ -82,28 +82,16 @@ class _PlantDetailsPageState extends State<PlantDetailsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      isPlantFavourite = !isPlantFavourite;
-                      if(isPlantFavourite) {
-                        favouritePlantList.add(plant);
-                      } else {
-                        favouritePlantList.remove(plant);
-                      }
-                    });
-                  },
-                  child: Container(
+                Container(
                     height: 60,
                     width: 60,
                     decoration: BoxDecoration(
-                      // color: Colors.white,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Center(
-                      child: isPlantFavourite == false ? Icon(Icons.favorite_border, color: Colors.black, size: 50,) : Icon(Icons.favorite, color: Colors.red, size: 50,),
+                    child: const Center(
+                      child: Icon(Icons.favorite_border, size: 50,),
                     )
-                  ),
                 ),
                 Container(
                   decoration: kSelectedPlantSizeButton,

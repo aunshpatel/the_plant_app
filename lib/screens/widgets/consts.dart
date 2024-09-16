@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../models/plant.dart';
-
-List<Plant> favouritePlantList = [];
-
-var cartPlantList = [];
-
-bool isPlantFavourite = false;
 
 const kTextTitleStyle = TextStyle(
   fontSize: 20,
